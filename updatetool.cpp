@@ -21,7 +21,7 @@ updateTool::~updateTool()
 
 void updateTool::getVersionInfo()
 {
-    localVersion = "2.0.1build1";
+    localVersion = "1.0.1build1";
     versionUrl = "http://47.104.73.107:8880/api/v1/get_latest_version?version=" + localVersion;
     qDebug() << versionUrl;
     versionUrlInfo = versionUrl.path();
@@ -77,13 +77,13 @@ void updateTool::getVersionInfoFinished(QNetworkReply *)
         {
             qDebug() << "latest_version is " << versionInfoJsonDoc["data"]["latest_version"].GetString();
             updateVersion = versionInfoJsonDoc["data"]["latest_version"].GetString();
-            qDebug() << (tr("当前不是最新版本， 最新版本号为") + updateVersion);
+            qDebug() << (("updateVersion is ") + updateVersion);
             versionInfoValue = updateVersion;
             versionFlag = true;
         }
         else
         {
-            qDebug() << (tr("当前已是最新版本， 版本号为") + localVersion);
+            qDebug() << (("localVersion is ") + localVersion);
             versionInfoValue = localVersion;
             versionFlag = false;
         }
@@ -203,7 +203,8 @@ void updateTool::getUpdateFinished(QNetworkReply *)
 }
 void updateTool::runShell()
 {
-    QProcess::execute("sh " + QString(TEMP_DIR) + "../update.sh");
+    qDebug() << "sh /home/kexin_zhu/workspace/update_tool/update.sh";
+    QProcess::execute("sh /home/kexin_zhu/workspace/update_tool/update.sh");
 }
 
 void updateTool::updateProj()
@@ -214,7 +215,7 @@ void updateTool::updateProj()
 
 void updateTool::getUpdateJson()
 {
-    updateInfoJsonDocFile = new QFile(QString(TEMP_DIR) + "../updateInfo.json");
+    updateInfoJsonDocFile = new QFile(QString(TEMP_DIR) + "../3dlogi/updateInfo.json");
     if(!updateInfoJsonDocFile->open(QIODevice::WriteOnly))
     {
         qDebug() << "updateInfojsonDocFile open error";

@@ -1,5 +1,5 @@
-TEMP_DIR="/Users/zkxin/Desktop/project/update_tool/download_file"
-RELEASE_DIR="/Users/zkxin/Desktop/project/update_tool/3dlogi"
+TEMP_DIR="/home/kexin_zhu/workspace/download_file"
+RELEASE_DIR="/home/kexin_zhu/workspace/3dlogi"
 
 unzip -o $TEMP_DIR/download_latest_version.zip -d $TEMP_DIR/
 

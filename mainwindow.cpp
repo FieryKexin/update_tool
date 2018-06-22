@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setWindowTitle(tr("更新工具"));
+    setWindowTitle("update_tool");
     menuBar = new QMenuBar(this);
     setMenuBar(menuBar);
     toolBar = new QToolBar(this);
@@ -17,9 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     update_tool = new updateTool(this);
 
-    getVersionInfoPushButton = new QPushButton(tr("校验版本"));
-    getUpdatePushButton = new QPushButton(tr("更新程序"));
-    restartPushButton = new QPushButton(tr("重启程序"));
+    getVersionInfoPushButton = new QPushButton("version");
+    getUpdatePushButton = new QPushButton("update");
+    restartPushButton = new QPushButton("restart");
 
     getUpdatePushButton->setEnabled(false);
     restartPushButton->hide();

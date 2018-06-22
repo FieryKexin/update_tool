@@ -21,15 +21,11 @@
 #include <QApplication>
 #include <QTimer>
 
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QJsonArray>
-
 #include "rapidjson/document.h"
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
 
-#define TEMP_DIR "/Users/zkxin/Desktop/project/update_tool/download_file/"
+#define TEMP_DIR "/home/kexin_zhu/workspace/download_file/"
 
 class updateTool : public QObject
 {
