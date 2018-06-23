@@ -13,9 +13,9 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QProgressBar>
-
+#include <QMessageBox>
 #include <QDebug>
-
+#include <QEventLoop>
 
 #define TEMP_DIR "/Users/zkxin/Desktop/project/update_tool/download_file/"
 
@@ -41,7 +41,7 @@ private:
     QPushButton *restartPushButton;
 
     updateTool *update_tool;
-
+    QProgressBar *downloadProgressBar;
 
 
 private slots:
@@ -51,6 +51,7 @@ private slots:
 
     void checkVersionFlag();
     void checkUpdateFlag();
+    void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 };
 
 #endif // MAINWINDOW_H

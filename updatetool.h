@@ -12,18 +12,12 @@
 #include <QString>
 #include <QStringList>
 #include <QProcess>
-#include <QMap>
 
 #include <QByteArray>
 #include <QTextStream>
-#include <QProgressBar>
 #include <QDebug>
 #include <QApplication>
 #include <QTimer>
-
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QJsonArray>
 
 #include "rapidjson/document.h"
 #include <rapidjson/writer.h>
@@ -43,9 +37,11 @@ public:
     void getUpdate();
     void restartProj();
 
-    QProgressBar *downloadProgressBar;
-    bool versionFlag;
-    bool updateFlag;
+    bool getVersionFlag();
+    bool getUpdateFlag();
+
+    QNetworkReply * getUpdateUrlReply();
+
 
 private:
     QMainWindow *mainWindow;
@@ -84,11 +80,14 @@ private:
     bool restartedValue;
     QFile *updateInfoJsonDocFile;
 
+    bool versionFlag;
+    bool updateFlag;
+
 private slots:
     void getVersionInfoFinished(QNetworkReply *);
     void generateSecretFinished(QNetworkReply *);
     void getUpdateFinished(QNetworkReply *);
-    void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
+
 private:
     void updateProj();
     void runShell();

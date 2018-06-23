@@ -4,8 +4,6 @@ updateTool::updateTool(QMainWindow* amainWindow)
 {
     updateVersion = "";
     mainWindow = amainWindow;
-    downloadProgressBar = new QProgressBar;
-    downloadProgressBar->hide();
     versionFlag = false;
     updateFlag = false;
     versionInfoValue = "";
@@ -120,11 +118,10 @@ void updateTool::getUpdate()
 
     updateUrlRequest.setUrl(updateUrl);
     updateUrlReply = updateUrlManager->get(updateUrlRequest);
-    downloadProgressBar->setValue(0);
-    downloadProgressBar->show();
 
-    connect(updateUrlReply, SIGNAL(downloadProgress(qint64, qint64)),
-     this, SLOT(updateDataReadProgress(qint64, qint64)));
+
+//    connect(updateUrlReply, SIGNAL(downloadProgress(qint64, qint64)),
+//     this, SLOT(updateDataReadProgress(qint64, qint64)));
     connect(updateUrlManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(getUpdateFinished(QNetworkReply *)));
 }
 
@@ -193,7 +190,7 @@ void updateTool::getUpdateFinished(QNetworkReply *)
     updateUrlReply = 0;
     delete updateUrlFile;
     updateUrlFile = 0;
-    downloadProgressBar->hide();
+
     downloadValue = true;
     getUpdateJson();
     updateFlag = true;
@@ -256,8 +253,17 @@ void updateTool::restartProj()
     QProcess::startDetached(qApp->applicationFilePath());
 }
 
-void updateTool::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
+
+
+QNetworkReply* updateTool::getUpdateUrlReply()
 {
-    downloadProgressBar->setMaximum(totalBytes);
-    downloadProgressBar->setValue(bytesRead);
+    return updateUrlReply;
+}
+bool updateTool::getVersionFlag()
+{
+    return versionFlag;
+}
+bool updateTool::getUpdateFlag()
+{
+    return updateFlag;
 }
