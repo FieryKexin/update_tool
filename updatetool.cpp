@@ -21,7 +21,7 @@ updateTool::~updateTool()
 
 void updateTool::getVersionInfo()
 {
-    localVersion = "2.0.1build1";
+    localVersion = "1.0.1build1";
     versionUrl = "http://47.104.73.107:8880/api/v1/get_latest_version?version=" + localVersion;
     qDebug() << versionUrl;
     versionUrlInfo = versionUrl.path();
