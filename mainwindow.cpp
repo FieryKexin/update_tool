@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainLayout = new QGridLayout(centralWidget);
 
-    update_tool = new updateTool(this);
+    version_manager = new aq::versionManager(this);
 
     getVersionInfoPushButton = new QPushButton(tr("校验版本"));
     getUpdatePushButton = new QPushButton(tr("更新程序"));
@@ -48,13 +48,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::doVersionInfo()
 {
-    update_tool->getVersionInfo();
-    connect(update_tool, SIGNAL(getVersionInfoFinishedSignal()), this, SLOT(checkVersionFlag()));
+    version_manager->getVersionInfo();
+    connect(version_manager, SIGNAL(getVersionInfoFinishedSignal()), this, SLOT(checkVersionFlag()));
 }
 
 void MainWindow::checkVersionFlag()
 {
-    if (update_tool->getVersionFlag())
+    if (version_manager->getVersionFlag())
     {
         getUpdatePushButton->setEnabled(true);
     }
@@ -64,25 +64,25 @@ void MainWindow::doUpdate()
 {
     downloadProgressBar->setValue(0);
     downloadProgressBar->show();
-    update_tool->getUpdate();
-    connect(update_tool->getUpdateUrlReply(), SIGNAL(downloadProgress(qint64, qint64)),
+    version_manager->getUpdate();
+    connect(version_manager->getUpdateUrlReply(), SIGNAL(downloadProgress(qint64, qint64)),
      this, SLOT(updateDataReadProgress(qint64, qint64)));
-    connect(update_tool, SIGNAL(getUpdateFinishedSignal()), this, SLOT(checkUpdateFlag()));
+    connect(version_manager, SIGNAL(getUpdateFinishedSignal()), this, SLOT(checkUpdateFlag()));
 
 }
 void MainWindow::checkUpdateFlag()
 {
-    if (update_tool->getUpdateFlag())
+    if (version_manager->getUpdateFlag())
     {
         downloadProgressBar->hide();
         restartPushButton->show();
-        update_tool->restartProj();
+        version_manager->restartProj();
     }
 }
 
 void MainWindow::doRestart()
 {
-    update_tool->restartProj();
+    version_manager->restartProj();
 }
 
 void MainWindow::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes)

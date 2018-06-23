@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "updatetool.h"
+#include "aq_version_manager.h"
 
 #include <QMainWindow>
 #include <QMenuBar>
@@ -40,7 +40,7 @@ private:
     QPushButton *getUpdatePushButton;
     QPushButton *restartPushButton;
 
-    updateTool *update_tool;
+    aq::versionManager *version_manager;
     QProgressBar *downloadProgressBar;
 
 

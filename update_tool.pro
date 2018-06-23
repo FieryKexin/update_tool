@@ -26,9 +26,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    updatetool.cpp
+    aq_version_manager.cpp
 
 HEADERS += \
         mainwindow.h \
-    updatetool.h
+    aq_version_manager.h
 INCLUDEPATH += /usr/local/include
